@@ -12,7 +12,7 @@ Welcome aboard my Digital Shipyard. This project is my personal portfolio, built
 
 ### View the Live Site
 
-**[Click here to see the portfolio in action!](https://vamshikrishna9608.github.io/Portfolio/)**  <!-- IMPORTANT: Replace this link with your live deployment URL! -->
+**[Click here to see the portfolio in action!](https://vamshikrishna9608.github.io/Vamshi/)**  <!-- IMPORTANT: Replace this link with your live deployment URL! -->
 
 ---
 
@@ -62,7 +62,7 @@ To inspect the blueprints or customize the project for yourself, follow these si
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/vamshikrishna779/Portfolio.git
+    git clone https://github.com/vamshikrishna779/Vamshi.git
     ```
 
 2.  **Navigate to the Directory:**
