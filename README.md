@@ -12,7 +12,7 @@ Welcome aboard my Digital Shipyard. This project is my personal portfolio, built
 
 ### View the Live Site
 
-**[Click here to see the portfolio in action!](https://vamshikrishna9608.github.io/Vamshi/)**  <!-- IMPORTANT: Replace this link with your live deployment URL! -->
+**[Click here to see the portfolio in action!](https://vamshikrishna779.github.io/Vamshi/)**  <!-- IMPORTANT: Replace this link with your live deployment URL! -->
 
 ---
 
@@ -97,8 +97,8 @@ The entire application is contained within a single `index.html` file for simpli
 
 I'm **Garige Vamshikrishna**, a passionate software developer who loves building robust and creative applications. If you'd like to collaborate or recruit me for your team, please feel free to reach out.
 
-*   **GitHub:** [@vamshikrishna9608](https://github.com/vamshikrishna779)
-*   **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/vamshikrishna9608/) <!-- IMPORTANT: Replace this link! -->
+*   **GitHub:** [@vamshikrishna779](https://github.com/vamshikrishna779)
+*   **LinkedIn:** [@vamshikrishna9608](https://www.linkedin.com/in/vamshikrishna9608/) <!-- IMPORTANT: Replace this link! -->
 
 ---
 
