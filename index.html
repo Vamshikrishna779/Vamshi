@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vamshikrishna - Digital Shipwright</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=IM+Fell+English+SC&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Theme 1: Light (Daybreak Island) */
+            --bg-primary-light: #f8f9fa;
+            --bg-secondary-light: #ffffff;
+            --text-primary-light: #2c3e50;
+            --text-secondary-light: #5a728a;
+            --header-bg-light: rgba(26, 35, 126, 0.95);
+            --accent-primary-light: #0277bd; /* Ocean Blue */
+            --accent-secondary-light: #ffd700; /* Treasure Gold */
+            --accent-tertiary-light: #1a237e; /* Navy Blue */
+            --card-shadow-light: rgba(0,0,0,0.1);
+
+            /* Theme 2: Dark (Wano Night) */
+            --bg-primary-dark: #121212;
+            --bg-secondary-dark: #1e1e1e;
+            --text-primary-dark: #e0e0e0;
+            --text-secondary-dark: #a0a0a0;
+            --header-bg-dark: rgba(18, 18, 18, 0.9);
+            --accent-primary-dark: #d32f2f; /* Akazaya Red */
+            --accent-secondary-dark: #9c27b0; /* Oden Purple */
+            --accent-tertiary-dark: #d32f2f;
+            --card-shadow-dark: rgba(0,0,0,0.4);
+
+            /* Theme 3: One Piece (Grand Line Treasure) */
+            --bg-primary-onepiece: url('https://www.transparenttextures.com/patterns/old-map.png'), #c5a987;
+            --bg-secondary-onepiece: #f5e5c7; /* Parchment Paper */
+            --text-primary-onepiece: #4a2c2a; /* Dark Wood */
+            --text-secondary-onepiece: #6d4c41;
+            --header-bg-onepiece: rgba(74, 44, 42, 0.9);
+            --accent-primary-onepiece: #b71c1c; /* Deeper Pirate Red */
+            --accent-secondary-onepiece: #DAA520; /* Gold Coin */
+            --accent-tertiary-onepiece: #4a2c2a;
+            --card-shadow-onepiece: rgba(74, 44, 42, 0.2);
+        }
+
+        /* Default to Light Theme */
+        body {
+            --bg-primary: var(--bg-primary-light);
+            --bg-secondary: var(--bg-secondary-light);
+            --text-primary: var(--text-primary-light);
+            --text-secondary: var(--text-secondary-light);
+            --header-bg: var(--header-bg-light);
+            --accent-primary: var(--accent-primary-light);
+            --accent-secondary: var(--accent-secondary-light);
+            --accent-tertiary: var(--accent-tertiary-light);
+            --card-shadow: var(--card-shadow-light);
+        }
+
+        body.dark-theme {
+            --bg-primary: var(--bg-primary-dark);
+            --bg-secondary: var(--bg-secondary-dark);
+            --text-primary: var(--text-primary-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --header-bg: var(--header-bg-dark);
+            --accent-primary: var(--accent-primary-dark);
+            --accent-secondary: var(--accent-secondary-dark);
+            --accent-tertiary: var(--accent-tertiary-dark);
+            --card-shadow: var(--card-shadow-dark);
+        }
+
+        body.onepiece-theme {
+            --bg-primary: var(--bg-primary-onepiece);
+            --bg-secondary: var(--bg-secondary-onepiece);
+            --text-primary: var(--text-primary-onepiece);
+            --text-secondary: var(--text-secondary-onepiece);
+            --header-bg: var(--header-bg-onepiece);
+            --accent-primary: var(--accent-primary-onepiece);
+            --accent-secondary: var(--accent-secondary-onepiece);
+            --accent-tertiary: var(--accent-tertiary-onepiece);
+            --card-shadow: var(--card-shadow-onepiece);
+        }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: background 0.4s, color 0.4s;
+            overflow-x: hidden;
+        }
+        body.onepiece-theme { font-family: 'IM Fell English SC', serif; }
+
+        .pirate-font { font-family: 'Pirata One', cursive; }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: fixed; top: 80px; right: 20px; z-index: 1001; background: var(--bg-secondary);
+            border-radius: 20px; padding: 5px; display: flex; gap: 5px;
+            border: 2px solid var(--accent-primary); box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: background 0.4s, border-color 0.4s;
+        }
+        .theme-switcher button {
+            width: 30px; height: 30px; border-radius: 50%; border: none; cursor: pointer;
+            font-size: 1rem; transition: transform 0.2s, opacity 0.3s;
+        }
+        .theme-switcher button.active { transform: scale(1.1); border: 2px solid var(--accent-secondary); }
+        #light-mode { background: #f0f4f8; color: #0277bd; }
+        #dark-mode { background: #1e1e1e; color: #d32f2f; }
+        #onepiece-mode { background: #c5a987; color: #4a2c2a; }
+
+        /* Animated waves background */
+        .waves {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%23ffffff'%3E%3C/path%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%23ffffff'%3E%3C/path%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: wave 10s ease-in-out infinite;
+        }
+        @keyframes wave { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-50px); } }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; background: var(--header-bg);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            z-index: 1000; transition: all 0.4s ease;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; max-width: 1200px; margin: 0 auto; }
+        .logo { color: var(--accent-secondary); font-size: 1.8rem; font-weight: bold; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: #f8f9fa; text-decoration: none; transition: color 0.3s ease; font-weight: 500; }
+        .nav-links a:hover { color: var(--accent-secondary); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh; background: linear-gradient(135deg, var(--accent-tertiary) 0%, var(--accent-primary) 100%);
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; width: 200%; height: 200%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 15L60 35L85 35L67 50L73 75L50 60L27 75L33 50L15 35L40 35Z' fill='%23ffffff' opacity='0.03'/%3E%3C/svg%3E") repeat;
+            animation: float 20s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+        .hero-content { position: relative; z-index: 2; }
+        .hero h1 { font-size: 4rem; margin-bottom: 1rem; animation: slideInUp 1s ease-out; }
+        .hero-tagline { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; animation: slideInUp 1s ease-out 0.2s both; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: slideInUp 1s ease-out 0.4s both; }
+        .btn { padding: 1rem 2rem; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
+        .btn-primary { background: var(--accent-secondary); color: var(--accent-tertiary); }
+        .btn-secondary { background: transparent; color: white; border: 2px solid white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Section Styling */
+        .section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+        .section h2 { font-size: 3rem; text-align: center; margin-bottom: 3rem; color: var(--text-primary); }
+
+        /* About Section */
+        .about-content { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center; }
+        .about-image { text-align: center; }
+        .profile-pic { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent-secondary); box-shadow: 0 10px 30px var(--card-shadow); }
+        .bounty-stats { display: flex; justify-content: space-around; margin: 3rem 0; flex-wrap: wrap; gap: 1rem; }
+        .stat-card { background: var(--accent-tertiary); color: white; padding: 2rem; border-radius: 15px; text-align: center; flex: 1; min-width: 200px; transform: rotate(-2deg); transition: transform 0.3s ease; }
+        .stat-card:nth-child(2) { transform: rotate(1deg); }
+        .stat-card:nth-child(3) { transform: rotate(-1deg); }
+        .stat-card:hover { transform: rotate(0deg) scale(1.05); }
+        .stat-number { font-size: 2.5rem; font-weight: bold; color: var(--accent-secondary); }
+
+        /* Projects Section */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .project-card { background: var(--bg-secondary); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px var(--card-shadow); transition: all 0.3s ease; border: 3px solid transparent; }
+        .project-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px var(--card-shadow); border-color: var(--accent-secondary); }
+        .project-image { width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid var(--accent-secondary); }
+        .project-header { background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-primary)); color: white; padding: 1.5rem; text-align: center; }
+        .project-title { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .project-type { opacity: 0.8; font-style: italic; }
+        .project-content { padding: 2rem; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+        .tech-tag { background: var(--accent-secondary); color: var(--accent-tertiary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold; }
+
+        /* Skills Section */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .skill-category { background: var(--bg-secondary); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px var(--card-shadow); text-align: center; }
+        .skill-icon { font-size: 3rem; color: var(--accent-tertiary); margin-bottom: 1rem; }
+        .skill-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+        .skill-item { background: var(--accent-primary); color: white; padding: 0.5rem 1rem; border-radius: 25px; font-size: 0.9rem; }
+
+        /* Education Section */
+        .education-timeline { position: relative; padding: 2rem 0; }
+        .timeline-item { background: var(--bg-secondary); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 5px 15px var(--card-shadow); border-left: 5px solid var(--accent-secondary); }
+        .wanted-posters { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .poster { color: white; padding: 2rem; border-radius: 15px; text-align: center; transform: rotate(-2deg); transition: transform 0.3s ease; border: 3px dashed var(--accent-secondary); }
+        .poster.red { background: var(--accent-primary-dark); }
+        .poster.blue { background: var(--accent-tertiary); }
+        .poster:hover { transform: rotate(0deg) scale(1.05); }
+        .poster .wanted-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; }
+        .poster .wanted-reason { font-size: 1.2rem; margin-bottom: 1rem; }
+        .poster .wanted-details { background: rgba(255,255,255,0.8); color: var(--text-primary); padding: 0.5rem; border-radius: 10px; margin-bottom: 1rem; }
+        .poster .wanted-footer { font-size: 0.9rem; }
+
+        /* Contact Section */
+        .contact { background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-primary)); color: white; text-align: center; }
+        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        .contact-info { text-align: left; }
+        .contact-item { display: flex; align-items: center; margin-bottom: 1rem; font-size: 1.1rem; }
+        .contact-item i { font-size: 1.5rem; margin-right: 1rem; color: var(--accent-secondary); width: 30px; }
+        .social-links { display: flex; gap: 1rem; margin-top: 2rem; }
+        .social-link { display: inline-block; width: 50px; height: 50px; background: var(--accent-secondary); color: var(--accent-tertiary); text-align: center; line-height: 50px; border-radius: 50%; font-size: 1.5rem; transition: transform 0.3s ease; }
+        .social-link:hover { transform: scale(1.2) rotate(360deg); }
+        .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-group { display: flex; flex-direction: column; text-align: left; }
+        .form-group label { margin-bottom: 0.5rem; font-weight: bold; }
+        .form-group input, .form-group textarea { padding: 1rem; border: none; border-radius: 10px; font-size: 1rem; font-family: 'Lato', sans-serif; background: var(--bg-secondary); color: var(--text-primary); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        /* Footer */
+        footer { background: var(--text-primary); color: var(--bg-secondary); text-align: center; padding: 2rem; transition: background 0.4s, color 0.4s; }
+        .footer-quote { font-size: 1.2rem; font-style: italic; margin-bottom: 1rem; color: var(--accent-secondary); }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; } /* Make hamburger visible */
+            .hero h1 { font-size: 2.5rem; }
+            .hero-tagline { font-size: 1.2rem; }
+            .about-content, .contact-content { grid-template-columns: 1fr; }
+            .bounty-stats { flex-direction: column; }
+            .section { padding: 3rem 5%; }
+            .section h2 { font-size: 2.5rem; }
+            .theme-switcher { top: auto; bottom: 20px; right: 50%; transform: translateX(50%); }
+        }
+        .menu-toggle { display: none; } /* Hide on desktop */
+
+        /* Scroll animations */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body id="body">
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button id="light-mode" title="Daybreak Island Theme" class="active"><i class="fa-solid fa-sun"></i></button>
+        <button id="dark-mode" title="Wano Night Theme"><i class="fa-solid fa-moon"></i></button>
+        <button id="onepiece-mode" title="Grand Line Treasure Theme"><i class="fa-solid fa-skull-crossbones"></i></button>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo pirate-font">Vamshikrishna</div>
+            <ul class="nav-links">
+                <li><a href="#home">The Dock</a></li>
+                <li><a href="#about">The Shipwright</a></li>
+                <li><a href="#projects">The Fleet</a></li>
+                <li><a href="#skills">The Map</a></li>
+                <li><a href="#education">Training Dojo</a></li>
+                <li><a href="#contact">Den Den Mushi</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <!-- Hamburger bars will be added by JS if needed, or kept simple -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="pirate-font">I'm GARIGE VAMSHIKRISHNA</h1>
+            <div class="hero-tagline">Digital Shipwright // Full-Stack Developer // Builder of Scalable Vessels</div>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Fleet</a>
+                <a href="#contact" class="btn btn-secondary">Recruit Me!</a>
+            </div>
+        </div>
+        <div class="waves"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section fade-in">
+        <h2 class="pirate-font">The Shipwright</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="https://via.placeholder.com/250x250/1a237e/ffffff?text=VK" alt="Vamshi Krishna Profile" class="profile-pic" />
+            </div>
+            <div class="about-text">
+                <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">Ahoy! I'm a Software Developer passionate about building scalable applications and intelligent solutions—the kind of ships that can brave the New World of data.</p>
+                <p style="margin-bottom: 1.5rem;">My journey didn't start on the Grand Line, but in the workshops of Vellore Institute of Technology (Water 7). There, I honed my craft (CGPA: 8.53) and learned the blueprints of software engineering.</p>
+                <p style="margin-bottom: 1.5rem;">I've trained under veterans at TechCiti Technologies, where I developed ML models that cut preprocessing time by 30%—making our ship's cannon (the AI) fire faster and truer!</p>
+                <p><strong>My Nakama (Languages I speak):</strong> Telugu (Native), English (Fluent), Hindi (Intermediate)</p>
+            </div>
+        </div>
+        <div class="bounty-stats">
+            <div class="stat-card">
+                <div class="stat-number pirate-font">4+</div><div>Years Experience</div><div style="font-size: 0.9rem; opacity: 0.8;">BOUNTY</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number pirate-font">5+</div><div>Projects Completed</div><div style="font-size: 0.9rem; opacity: 0.8;">SHIPS BUILT</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number pirate-font">1000+</div><div>Lives Impacted</div><div style="font-size: 0.9rem; opacity: 0.8;">USERS SERVED</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section fade-in" style="background: var(--bg-primary);">
+        <h2 class="pirate-font">The Fleet</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Every great pirate needs a great ship. Here are the vessels I've designed, built, and launched into the digital seas.</p>
+        <div class="projects-grid">
+            <!-- All 4 project cards from original code -->
+            <div class="project-card">
+                <img src="https://via.placeholder.com/400x200/0277bd/ffffff?text=AI+Query+Ship" alt="Omni-Query Merry Project" class="project-image" />
+                <div class="project-header"><div class="project-title pirate-font">The "Omni-Query Merry"</div><div class="project-type">AI Scout Ship</div></div>
+                <div class="project-content">
+                    <div class="tech-tags"><span class="tech-tag">FastAPI</span><span class="tech-tag">Ollama</span><span class="tech-tag">SQLite</span><span class="tech-tag">Chart.js</span></div>
+                    <p><strong>Log Entry:</strong> Built a swift scout ship that translates the captain's natural language into precise SQL commands. It charts the results on interactive maps and keeps a log of all conversations.</p>
+                    <div style="margin-top: 1rem;"><a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View GitHub Repo</a></div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/400x200/4caf50/ffffff?text=Green+Energy+Platform" alt="Green Energy Sunny Project" class="project-image" />
+                <div class="project-header"><div class="project-title pirate-font">The "Green Energy Sunny"</div><div class="project-type">Cola-Powered Dreadnought</div></div>
+                <div class="project-content">
+                    <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+                    <p><strong>Log Entry:</strong> A platform promoting sustainable energy, just like the Thousand Sunny runs on cola! This vessel is built to showcase a brighter, more sustainable future with an interactive UI.</p>
+                    <div style="margin-top: 1rem;"><a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Live Project</a></div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/400x200/ff9800/ffffff?text=Food+Rescue+App" alt="resQfood Baratie Project" class="project-image" />
+                <div class="project-header"><div class="project-title pirate-font">The "resQfood Baratie"</div><div class="project-type">Mobile Supply Ship</div></div>
+                <div class="project-content">
+                    <div class="tech-tags"><span class="tech-tag">Java</span><span class="tech-tag">Firebase</span><span class="tech-tag">Google Maps API</span><span class="tech-tag">Razorpay</span></div>
+                    <p><strong>Log Entry:</strong> A mobile app that connects those with surplus supplies to those in need. Just like the Baratie restaurant, it feeds anyone, regardless of their story. Integrated secure payment systems.</p>
+                    <div style="margin-top: 1rem;"><a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View on Play Store</a></div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/400x200/9c27b0/ffffff?text=IoT+Security+System" alt="Iron Gate Franky Project" class="project-image" />
+                <div class="project-header"><div class="project-title pirate-font">The "Iron Gate Franky"</div><div class="project-type">Automated Defense System</div></div>
+                <div class="project-content">
+                    <div class="tech-tags"><span class="tech-tag">ESP32</span><span class="tech-tag">Face Recognition</span><span class="tech-tag">IoT</span></div>
+                    <p><strong>Log Entry:</strong> SUUUUPER! An IoT-enabled defense system for your home. This secure gate recognizes its crew and keeps intruders out. Controlled remotely, it sends real-time alerts.</p>
+                    <div style="margin-top: 1rem;"><a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Demo Video</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section fade-in">
+        <h2 class="pirate-font">The Map & Arsenal</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">A shipwright is nothing without his tools and his knowledge of the seas.</p>
+        <div class="skills-grid">
+            <!-- Skills grid content from original code -->
+            <div class="skill-category"><i class="fas fa-compass skill-icon"></i><h3>Navigation (Languages)</h3><div class="skill-list"><span class="skill-item">SQL</span><span class="skill-item">Java</span><span class="skill-item">HTML</span><span class="skill-item">CSS</span><span class="skill-item">Python</span></div></div>
+            <div class="skill-category"><i class="fas fa-cog skill-icon"></i><h3>Log Pose (Frameworks & Tools)</h3><div class="skill-list"><span class="skill-item">Power BI</span><span class="skill-item">Django</span><span class="skill-item">React</span><span class="skill-item">Flask</span><span class="skill-item">Selenium</span></div></div>
+            <div class="skill-category"><i class="fas fa-cloud skill-icon"></i><h3>The Grand Line (Cloud & Databases)</h3><div class="skill-list"><span class="skill-item">MySQL</span><span class="skill-item">Firebase</span><span class="skill-item">Google Cloud</span><span class="skill-item">NoSQL</span></div></div>
+            <div class="skill-category"><i class="fas fa-rocket skill-icon"></i><h3>Ancient Weapons (Advanced Tech)</h3><div class="skill-list"><span class="skill-item">Machine Learning</span><span class="skill-item">IoT</span><span class="skill-item">Full-Stack Development</span><span class="skill-item">AI</span></div></div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section fade-in" style="background: var(--bg-primary);">
+        <h2 class="pirate-font">The Training Dojo</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Places I've Trained</p>
+        <div class="education-timeline">
+            <!-- Timeline items from original code -->
+            <div class="timeline-item"><h3 style="color: var(--text-primary); margin-bottom: 1rem;">🏫 TS Model School, Telangana</h3><div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap;"><span><strong>10th Grade (SSC)</strong></span><span style="color: var(--accent-primary);">CGPA: 9.5/10</span></div></div>
+            <div class="timeline-item"><h3 style="color: var(--text-primary); margin-bottom: 1rem;">🎓 SR Junior College, Telangana</h3><div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap;"><span><strong>12th Grade (MPC)</strong></span><span style="color: var(--accent-primary);">97.4%</span></div></div>
+            <div class="timeline-item"><h3 style="color: var(--text-primary); margin-bottom: 1rem;">🏛️ Water 7 (Vellore Institute of Technology)</h3><div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap;"><span><strong>M.Tech (Integrated) Software Engineering</strong></span><span style="color: var(--accent-primary);">2021–2026</span></div><div style="background: var(--accent-secondary); color: var(--accent-tertiary); padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; font-weight: bold;">Bounty Upon Graduation: 8.53/10</div></div>
+        </div>
+        <div style="margin-top: 3rem;">
+            <h3 class="pirate-font" style="text-align: center; margin-bottom: 2rem; font-size: 2rem; color: var(--text-primary);">Wanted Posters (Certifications)</h3>
+            <div class="wanted-posters">
+                <!-- Wanted posters from original code, now with dynamic colors -->
+                <div class="poster red">
+                    <div class="wanted-title">WANTED</div><div class="wanted-reason">FOR MASTERY OF DATA</div>
+                    <div class="wanted-details">Introduction to Analytics</div><div class="wanted-footer">Great Learning Academy | AUG 2025</div>
+                </div>
+                <div class="poster blue">
+                    <div class="wanted-title">WANTED</div><div class="wanted-reason">FOR BUILDING SUPER WEAPONS</div>
+                    <div class="wanted-details">Software Developer Intern</div><div class="wanted-footer">TechCiti Technologies | MAY–JUL 2024</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <h2 class="pirate-font" style="color: white;">Sound the Den Den Mushi!</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 3rem;">Are you a Captain looking for a Shipwright to build the vessel that will make you the King of the Pirates? Let's talk.</p>
+        <div class="contact-content">
+            <!-- Contact info and form from original code -->
+            <div class="contact-info">
+                <h3 style="margin-bottom: 2rem; font-size: 1.5rem;"><i class="fas fa-scroll" style="margin-right: 0.5rem;"></i>Bounty Poster Contact Info</h3>
+                <div class="contact-item"><i class="fas fa-phone"></i><span>+91 7997410508</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i><span>vamshikrishna9608@gmail.com</span></div>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Telangana, India (Currently docked)</span></div>
+                <div class="social-links">
+                    <a href="https://github.com/vamshikrishna9608" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a><a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3 style="margin-bottom: 2rem; font-size: 1.5rem;"><i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>Send Message in a Bottle</h3>
+                <form>
+                    <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
+                    <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required></div>
+                    <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell me about your adventure..." required></textarea></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-quote pirate-font">"A man's dream... will never die!" - Vamshi</div>
+        <div style="margin-bottom: 1rem;">© 2024 Vamshi's Digital Shipyard. All rights reserved.</div>
+        <div style="font-size: 0.8rem; opacity: 0.7;">One Piece is a trademark of Eiichiro Oda/Shueisha. This site is a fan-made tribute.</div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Theme Switcher Logic ---
+            const body = document.getElementById('body');
+            const lightModeBtn = document.getElementById('light-mode');
+            const darkModeBtn = document.getElementById('dark-mode');
+            const onepieceModeBtn = document.getElementById('onepiece-mode');
+            const buttons = [lightModeBtn, darkModeBtn, onepieceModeBtn];
+
+            const applyTheme = (theme) => {
+                body.className = '';
+                if (theme) body.classList.add(theme);
+                localStorage.setItem('portfolioTheme', theme);
+                buttons.forEach(btn => btn.classList.remove('active'));
+                const activeBtn = theme === 'dark-theme' ? darkModeBtn : theme === 'onepiece-theme' ? onepieceModeBtn : lightModeBtn;
+                activeBtn.classList.add('active');
+            };
+            
+            lightModeBtn.addEventListener('click', () => applyTheme(''));
+            darkModeBtn.addEventListener('click', () => applyTheme('dark-theme'));
+            onepieceModeBtn.addEventListener('click', () => applyTheme('onepiece-theme'));
+
+            applyTheme(localStorage.getItem('portfolioTheme') || '');
+
+            // Original JS from your code
+            // Navbar background change on scroll
+            const nav = document.getElementById('navbar');
+            window.addEventListener('scroll', () => nav.style.background = window.scrollY > 100 ? 'rgba(26, 35, 126, 0.98)' : 'rgba(26, 35, 126, 0.95)');
+
+            // Fade in animation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // Stat card and poster hover effects
+            document.querySelectorAll('.stat-card, .poster').forEach(card => {
+                let originalTransform = getComputedStyle(card).transform;
+                if (originalTransform === "none") originalTransform = ""; // Reset if no initial transform
+                card.addEventListener('mouseenter', () => card.style.transform = 'rotate(0deg) scale(1.05)');
+                card.addEventListener('mouseleave', () => card.style.transform = originalTransform);
+            });
+
+            // Floating hero content animation
+            const heroContent = document.querySelector('.hero-content');
+            setInterval(() => {
+                heroContent.style.transform = heroContent.style.transform === 'translateY(-10px)' ? 'translateY(0px)' : 'translateY(-10px)';
+            }, 2000);
+            heroContent.style.transition = 'transform 2s ease-in-out';
+
+            // Form submission handler
+            document.querySelector('form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                if (name && email && message) {
+                    alert('Message sent successfully! I\'ll get back to you soon, nakama!');
+                    e.target.reset();
+                } else {
+                    alert('Please fill in all fields before sending your message in a bottle!');
+                }
+            });
+
+            // Typing effect
+            const tagline = document.querySelector('.hero-tagline');
+            const text = tagline.textContent;
+            let i = 0;
+            tagline.innerHTML = '';
+            function typeWriter() {
+                if (i < text.length) {
+                    tagline.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            setTimeout(typeWriter, 1000);
+
+            // Particle effect
+            const hero = document.querySelector('.hero');
+            if (!document.getElementById('sparkle-animation')) {
+                const style = document.createElement('style');
+                style.id = 'sparkle-animation';
+                style.textContent = `@keyframes sparkle { 0%, 100% { opacity: 0; transform: scale(0); } 50% { opacity: 1; transform: scale(1); } }`;
+                document.head.appendChild(style);
+            }
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                Object.assign(particle.style, {
+                    position: 'absolute', width: '4px', height: '4px',
+                    background: 'rgba(255, 215, 0, 0.6)', borderRadius: '50%',
+                    pointerEvents: 'none', left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`,
+                    animation: `sparkle ${3 + Math.random() * 4}s ease-in-out infinite`
+                });
+                hero.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html>
