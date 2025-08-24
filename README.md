@@ -62,7 +62,7 @@ To inspect the blueprints or customize the project for yourself, follow these si
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/vamshikrishna9608/Portfolio.git
+    git clone https://github.com/vamshikrishna779/Portfolio.git
     ```
 
 2.  **Navigate to the Directory:**
@@ -97,8 +97,8 @@ The entire application is contained within a single `index.html` file for simpli
 
 I'm **Garige Vamshikrishna**, a passionate software developer who loves building robust and creative applications. If you'd like to collaborate or recruit me for your team, please feel free to reach out.
 
-*   **GitHub:** [@vamshikrishna9608](https://github.com/vamshikrishna9608)
-*   **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/your-profile-url/) <!-- IMPORTANT: Replace this link! -->
+*   **GitHub:** [@vamshikrishna9608](https://github.com/vamshikrishna779)
+*   **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/vamshikrishna9608/) <!-- IMPORTANT: Replace this link! -->
 
 ---
 
