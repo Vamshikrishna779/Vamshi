@@ -13,31 +13,127 @@
             box-sizing: border-box;
         }
 
+        /* 
+        ========================================
+        THEME COLOR PALETTES & CORE VARIABLES
+        ========================================
+        */
         :root {
-            --straw-hat-red: #D8492A;
-            --straw-hat-yellow: #FFCC00;
-            --navy-blue: #003366;
-            --sail-white: #f8f9fa;
-            --treasure-gold: #FFD700;
-            --pirate-red: #d32f2f;
-            --ocean-blue: #0277bd;
-            --grand-line-blue: #1E90FF;
-            --text-dark: #2c3e50;
-            --wood-color: #8B4513;
-            --rope-color: #D2B48C;
+            /* Shared Variables */
+            --pirate-font: 'Pirata One', cursive;
+            --body-font: 'Lato', sans-serif;
+            --transition-speed: 0.3s;
+            --border-radius-main: 15px;
+            --border-radius-round: 50px;
         }
 
+        /* 
+        ---------------------------------
+        Theme 1: One Piece (Default)
+        "King of the Pirates" Theme
+        ---------------------------------
+        */
+        .theme-one-piece {
+            --bg-primary: #f0f8ff; /* Light Sky Blue */
+            --bg-secondary: #f8f9fa; /* Sail White */
+            --bg-accent: #003366; /* Navy Blue */
+            --bg-hero: linear-gradient(135deg, #003366 0%, #1E90FF 100%); /* Navy to Grand Line Blue */
+            --bg-card: white;
+            --bg-contact: linear-gradient(135deg, #003366, #0277bd); /* Navy to Ocean Blue */
+
+            --text-primary: #2c3e50; /* Dark Slate */
+            --text-secondary: white;
+            --text-accent: #003366; /* Navy Blue */
+            --text-hero: white;
+
+            --color-primary: #D8492A; /* Straw Hat Red */
+            --color-secondary: #FFD700; /* Treasure Gold */
+            --color-accent: #0277bd; /* Ocean Blue */
+            --color-border: #FFD700;
+
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-hover-color: rgba(0, 0, 0, 0.2);
+            --nav-bg: rgba(26, 35, 126, 0.95);
+            --footer-bg: #2c3e50;
+        }
+
+        /* 
+        ---------------------------------
+        Theme 2: Dark
+        "Void Century" Theme
+        ---------------------------------
+        */
+        .theme-dark {
+            --bg-primary: #1a1a2e; /* Deepest Navy */
+            --bg-secondary: #16213e; /* Darker Blue */
+            --bg-accent: #0f3460; /* Midnight Blue */
+            --bg-hero: linear-gradient(135deg, #000000 0%, #16213e 100%); /* Black to Dark Blue */
+            --bg-card: #1e2952;
+            --bg-contact: linear-gradient(135deg, #16213e, #0f3460);
+
+            --text-primary: #e0fbfc; /* Light Cyan */
+            --text-secondary: #e0fbfc;
+            --text-accent: #9df9ef; /* Poneglyph Glow */
+            --text-hero: white;
+
+            --color-primary: #3d5af1; /* Robin's Blue */
+            --color-secondary: #e94560; /* Red Poneglyph */
+            --color-accent: #9df9ef; /* Poneglyph Glow */
+            --color-border: #9df9ef;
+
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --shadow-hover-color: rgba(0, 0, 0, 0.4);
+            --nav-bg: rgba(15, 20, 40, 0.95);
+            --footer-bg: #0f1020;
+        }
+
+        /* 
+        ---------------------------------
+        Theme 3: Light
+        "Marine Justice" Theme
+        ---------------------------------
+        */
+        .theme-light {
+            --bg-primary: #ffffff; /* Pure White */
+            --bg-secondary: #f0f2f5; /* Light Gray */
+            --bg-accent: #e4e6eb; /* Lighter Gray */
+            --bg-hero: linear-gradient(135deg, #add8e6 0%, #f0f8ff 100%); /* Light Blue to Alice Blue */
+            --bg-card: white;
+            --bg-contact: linear-gradient(135deg, #005a9c, #0077be); /* Marine Blue Gradient */
+
+            --text-primary: #1c1e21; /* Almost Black */
+            --text-secondary: white;
+            --text-accent: #005a9c; /* Marine Blue */
+            --text-hero: #003366; /* Navy for contrast */
+
+            --color-primary: #005a9c; /* Marine Blue */
+            --color-secondary: #ffd700; /* Marine Gold Epaulettes */
+            --color-accent: #0077be; /* Lighter Marine Blue */
+            --color-border: #ffd700;
+
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --shadow-hover-color: rgba(0, 0, 0, 0.15);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #1c1e21;
+        }
+
+        /* 
+        ========================================
+        GENERAL STYLING
+        ========================================
+        */
         body {
-            font-family: 'Lato', sans-serif;
+            font-family: var(--body-font);
             line-height: 1.6;
-            color: var(--text-dark);
+            color: var(--text-primary);
             overflow-x: hidden;
-            background-color: #f0f8ff;
+            background-color: var(--bg-primary);
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%23f0f8ff'/%3E%3Cpath d='M25 25h50v50H25z' fill='%23e0f0ff'/%3E%3C/svg%3E");
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
 
         .pirate-font {
-            font-family: 'Pirata One', cursive;
+            font-family: var(--pirate-font);
         }
 
         /* Animated waves background */
@@ -50,23 +146,67 @@
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%23003366'%3E%3C/path%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%23003366'%3E%3C/path%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23003366'%3E%3C/path%3E%3C/svg%3E") repeat-x;
             animation: wave 10s ease-in-out infinite;
         }
+        .theme-dark .waves path { fill: var(--color-accent); }
+        .theme-light .waves path { fill: var(--color-primary); }
+
 
         @keyframes wave {
             0%, 100% { transform: translateX(0); }
             50% { transform: translateX(-50px); }
         }
 
-        /* Navigation */
+        /* 
+        ========================================
+        THEME SWITCHER
+        ========================================
+        */
+        .theme-switcher {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .theme-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--color-border);
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+        .theme-btn:hover {
+            transform: scale(1.15) rotate(15deg);
+        }
+        .theme-btn.active {
+            box-shadow: 0 0 15px var(--color-secondary);
+            transform: scale(1.1);
+        }
+       
+
+        /* 
+        ========================================
+        NAVIGATION
+        ========================================
+        */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(26, 35, 126, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid var(--treasure-gold);
+            transition: all var(--transition-speed) ease;
+            border-bottom: 3px solid var(--color-border);
+        }
+        .theme-light nav {
+            box-shadow: 0 2px 10px var(--shadow-color);
         }
 
         .nav-container {
@@ -79,12 +219,17 @@
         }
 
         .logo {
-            color: var(--treasure-gold);
+            color: var(--color-secondary);
             font-size: 1.8rem;
             font-weight: bold;
             display: flex;
             align-items: center;
+            transition: color var(--transition-speed) ease;
         }
+        .theme-light .logo {
+             color: var(--text-accent);
+        }
+
 
         .logo::before {
             content: "☠";
@@ -99,13 +244,17 @@
         }
 
         .nav-links a {
-            color: var(--sail-white);
+            color: var(--sail-white, #f8f9fa); /* Default for dark themes */
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color var(--transition-speed) ease;
             font-weight: 500;
             position: relative;
             padding: 0.5rem 0;
         }
+        .theme-light .nav-links a {
+            color: var(--text-primary);
+        }
+
 
         .nav-links a::after {
             content: '';
@@ -114,12 +263,15 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--treasure-gold);
-            transition: width 0.3s ease;
+            background-color: var(--color-secondary);
+            transition: width var(--transition-speed) ease;
         }
 
         .nav-links a:hover {
-            color: var(--treasure-gold);
+            color: var(--color-secondary);
+        }
+        .theme-light .nav-links a:hover {
+            color: var(--color-primary);
         }
 
         .nav-links a:hover::after {
@@ -130,25 +282,42 @@
             display: none;
             background: none;
             border: none;
-            color: var(--treasure-gold);
+            color: var(--color-secondary);
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1002;
+        }
+        .theme-light .mobile-menu-btn {
+            color: var(--text-accent);
         }
 
-        /* Hero Section */
+        /* 
+        ========================================
+        HERO SECTION
+        ========================================
+        */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--grand-line-blue) 100%);
+            background: var(--bg-hero);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: white;
+            color: var(--text-hero);
             position: relative;
             overflow: hidden;
         }
-
-        .hero::before {
+        .theme-dark .hero::before {
+            /* Poneglyph pattern for dark mode */
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 52 52'%3E%3Cpath fill='%239df9ef' fill-opacity='0.05' d='M13 52V41.333h26v10.667H13zM0 41.333V28h13v13.333H0zm39-13.333V15.333h13v13.334H39zM0 15.333V2.667h13v12.666H0zM26 13V0h13v13H26zM13 13V0H0v2.667h10.333V13H13zM39 28v-2.667H26V28h13zm13 13.333V28H39v10.667h2.667V41.333H52zm-13-13.333h2.667V15.333H39v2.667h10.333V28H39zM13 28v-2.667H0V28h13zM26 0h-2.667v13H26V0z'/%3E%3C/svg%3E");
+            animation: float 20s ease-in-out infinite;
+        }
+        .theme-one-piece .hero::before {
+             /* Star pattern for one piece mode */
             content: '';
             position: absolute;
             width: 200%;
@@ -173,6 +342,9 @@
             animation: slideInUp 1s ease-out;
             text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
         }
+        .theme-light .hero h1 {
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
 
         .hero-tagline {
             font-size: 1.5rem;
@@ -195,13 +367,13 @@
         .btn {
             padding: 1rem 2rem;
             border: none;
-            border-radius: 50px;
+            border-radius: var(--border-radius-round);
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.3s ease;
+            transition: all var(--transition-speed) ease;
             position: relative;
             overflow: hidden;
         }
@@ -225,65 +397,67 @@
         }
 
         @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 1;
-            }
-            20% {
-                transform: scale(25, 25);
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: scale(40, 40);
-            }
+            0% { transform: scale(0, 0); opacity: 1; }
+            20% { transform: scale(25, 25); opacity: 1; }
+            100% { opacity: 0; transform: scale(40, 40); }
         }
 
         .btn-primary {
-            background: var(--treasure-gold);
-            color: var(--navy-blue);
-            box-shadow: 0 4px 0 #ccac00;
+            background: var(--color-secondary);
+            color: var(--text-accent);
+            box-shadow: 0 4px 0 color-mix(in srgb, var(--color-secondary) 80%, black);
         }
+        .theme-dark .btn-primary { color: #1a1a2e; }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 0 #ccac00;
+            box-shadow: 0 6px 0 color-mix(in srgb, var(--color-secondary) 80%, black);
         }
 
         .btn-primary:active {
             transform: translateY(0);
-            box-shadow: 0 2px 0 #ccac00;
+            box-shadow: 0 2px 0 color-mix(in srgb, var(--color-secondary) 80%, black);
         }
 
         .btn-secondary {
             background: transparent;
-            color: white;
-            border: 2px solid white;
-            box-shadow: 0 4px 0 rgba(255,255,255,0.3);
+            color: var(--text-hero);
+            border: 2px solid var(--text-hero);
+            box-shadow: 0 4px 0 color-mix(in srgb, var(--text-hero) 30%, transparent);
         }
+        .theme-one-piece .btn-secondary, .theme-dark .btn-secondary {
+             border-color: white;
+             box-shadow: 0 4px 0 rgba(255,255,255,0.3);
+        }
+
 
         .btn-secondary:hover {
             transform: translateY(-2px);
+            box-shadow: 0 6px 0 color-mix(in srgb, var(--text-hero) 30%, transparent);
+        }
+        .theme-one-piece .btn-secondary:hover, .theme-dark .btn-secondary:hover {
             box-shadow: 0 6px 0 rgba(255,255,255,0.3);
         }
 
         .btn-secondary:active {
             transform: translateY(0);
+            box-shadow: 0 2px 0 color-mix(in srgb, var(--text-hero) 30%, transparent);
+        }
+         .theme-one-piece .btn-secondary:active, .theme-dark .btn-secondary:active {
             box-shadow: 0 2px 0 rgba(255,255,255,0.3);
         }
 
+
         @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Section Styling */
+        /* 
+        ========================================
+        SECTION STYLING
+        ========================================
+        */
         .section {
             padding: 5rem 5%;
             max-width: 1200px;
@@ -301,7 +475,7 @@
         .section h2 {
             font-size: 3rem;
             text-align: center;
-            color: var(--navy-blue);
+            color: var(--text-accent);
             position: relative;
             display: inline-block;
             padding: 0 1rem;
@@ -314,26 +488,27 @@
             top: 50%;
             width: 50px;
             height: 3px;
-            background-color: var(--treasure-gold);
+            background-color: var(--color-secondary);
         }
 
-        .section h2::before {
-            right: 100%;
-        }
+        .section h2::before { right: 100%; }
+        .section h2::after { left: 100%; }
 
-        .section h2::after {
-            left: 100%;
+        /* 
+        ========================================
+        ABOUT SECTION
+        ========================================
+        */
+        #about {
+            background-color: var(--bg-primary);
         }
-
-        /* About Section */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 3rem;
             align-items: center;
         }
-
-        .about-image {
+                .about-image {
             text-align: center;
             position: relative;
         }
@@ -345,16 +520,16 @@
             left: -10px;
             right: -10px;
             bottom: -10px;
-            border: 2px solid var(--treasure-gold);
+            border: 2px solid var(--color-border);
             border-radius: 50%;
             z-index: -1;
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.5; transform: scale(1); }
         }
 
         .profile-pic {
@@ -362,8 +537,8 @@
             height: 250px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid var(--treasure-gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 5px solid var(--color-border);
+            box-shadow: 0 10px 30px var(--shadow-color);
         }
 
         .bounty-stats {
@@ -375,18 +550,21 @@
         }
 
         .stat-card {
-            background: var(--navy-blue);
-            color: white;
+            background: var(--bg-accent);
+            color: var(--text-secondary);
             padding: 2rem;
-            border-radius: 15px;
+            border-radius: var(--border-radius-main);
             text-align: center;
             flex: 1;
             min-width: 200px;
             transform: rotate(-2deg);
-            transition: transform 0.3s ease;
+            transition: transform var(--transition-speed) ease;
             position: relative;
             overflow: hidden;
-            border: 2px solid var(--treasure-gold);
+            border: 2px solid var(--color-border);
+        }
+        .theme-light .stat-card {
+            background: var(--color-primary);
         }
 
         .stat-card::before {
@@ -396,7 +574,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: var(--treasure-gold);
+            background: var(--color-secondary);
         }
 
         .stat-card:nth-child(2) {
@@ -414,10 +592,17 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: bold;
-            color: var(--treasure-gold);
+            color: var(--color-secondary);
         }
 
-        /* Projects Section */
+        /* 
+        ========================================
+        PROJECTS SECTION ("THE FLEET")
+        ========================================
+        */
+        #projects {
+            background-color: var(--bg-secondary);
+        }
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -425,15 +610,16 @@
             margin-top: 3rem;
         }
 
-        /* Project card improvements */
         .project-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: all var(--transition-speed) ease;
             border: 3px solid transparent;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card::before {
@@ -443,26 +629,26 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, var(--straw-hat-red), var(--treasure-gold));
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
             z-index: 1;
         }
 
         .project-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border-color: var(--treasure-gold);
+            box-shadow: 0 20px 40px var(--shadow-hover-color);
+            border-color: var(--color-border);
         }
 
         .project-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-bottom: 3px solid var(--treasure-gold);
+            border-bottom: 3px solid var(--color-border);
         }
 
         .project-header {
-            background: linear-gradient(135deg, var(--navy-blue), var(--ocean-blue));
-            color: white;
+            background: linear-gradient(135deg, var(--bg-accent), var(--color-accent));
+            color: var(--text-secondary);
             padding: 1.5rem;
             text-align: center;
         }
@@ -479,6 +665,14 @@
 
         .project-content {
             padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .project-description {
+            flex-grow: 1;
         }
 
         .tech-tags {
@@ -489,15 +683,25 @@
         }
 
         .tech-tag {
-            background: var(--treasure-gold);
-            color: var(--navy-blue);
+            background: var(--color-secondary);
+            color: var(--text-accent);
             padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+            border-radius: var(--border-radius-round);
             font-size: 0.9rem;
             font-weight: bold;
         }
+        .theme-dark .tech-tag {
+            color: #1a1a2e;
+        }
 
-        /* Skills Section */
+        /* 
+        ========================================
+        SKILLS SECTION ("THE MAP & ARSENAL")
+        ========================================
+        */
+        #skills {
+            background-color: var(--bg-primary);
+        }
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -506,12 +710,12 @@
         }
 
         .skill-category {
-            background: white;
+            background: var(--bg-card);
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: var(--border-radius-main);
+            box-shadow: 0 5px 15px var(--shadow-color);
             text-align: center;
-            border: 2px solid var(--treasure-gold);
+            border: 2px solid var(--color-border);
             position: relative;
         }
 
@@ -523,14 +727,18 @@
             transform: translateX(-50%);
             width: 30px;
             height: 10px;
-            background: var(--treasure-gold);
+            background: var(--color-border);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
 
         .skill-icon {
             font-size: 3rem;
-            color: var(--navy-blue);
+            color: var(--text-accent);
             margin-bottom: 1rem;
+            transition: transform var(--transition-speed) ease;
+        }
+        .skill-category:hover .skill-icon {
+            transform: scale(1.2) rotate(10deg);
         }
 
         .skill-list {
@@ -542,61 +750,216 @@
         }
 
         .skill-item {
-            background: var(--ocean-blue);
-            color: white;
+            background: var(--color-accent);
+            color: var(--text-secondary);
             padding: 0.5rem 1rem;
-            border-radius: 25px;
+            border-radius: var(--border-radius-round);
             font-size: 0.9rem;
         }
+        .theme-dark .skill-item {
+            background: var(--color-primary);
+        }
 
-        /* Education Section */
-        .education-timeline {
+        /* 
+        ========================================
+        EDUCATION SECTION ("TRAINING DOJO") [REDESIGNED]
+        ========================================
+        */
+        #education {
+            background: var(--bg-secondary);
             position: relative;
-            padding: 2rem 0;
+            overflow: hidden;
         }
-
-        .education-timeline::before {
-            content: '';
+        
+        /* Background element reminiscent of a dojo */
+        #education::before {
+            content: '修行'; /* Japanese for "Training" */
             position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 30px;
-            width: 3px;
-            background: var(--treasure-gold);
-        }
-
-        .timeline-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-left: 5px solid var(--treasure-gold);
-            position: relative;
-            margin-left: 60px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -40px;
             top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--treasure-gold);
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px var(--treasure-gold);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25rem;
+            color: var(--bg-accent);
+            opacity: 0.05;
+            z-index: 0;
+            font-family: serif;
         }
 
-        /* Contact Section */
+        .dojo-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dojo-scroll {
+            background: var(--bg-card);
+            border: 3px solid color-mix(in srgb, var(--text-accent) 60%, transparent);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px var(--shadow-color);
+            transition: all var(--transition-speed) ease;
+            position: relative;
+        }
+
+        .dojo-scroll:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-hover-color);
+        }
+
+        /* Scroll-like top and bottom elements */
+        .dojo-scroll::before, .dojo-scroll::after {
+            content: '';
+            position: absolute;
+            left: -15px;
+            right: -15px;
+            height: 15px;
+            background: var(--color-secondary);
+            border: 2px solid color-mix(in srgb, var(--text-accent) 60%, transparent);
+            border-radius: 5px;
+        }
+        .dojo-scroll::before { top: -15px; }
+        .dojo-scroll::after { bottom: -15px; }
+
+        .scroll-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px dashed var(--color-border);
+        }
+
+        .scroll-icon {
+            font-size: 2.5rem;
+            color: var(--text-accent);
+        }
+
+        .scroll-title h3 {
+            color: var(--text-accent);
+            margin: 0;
+        }
+
+        .scroll-title span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .scroll-content p {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .scroll-grade {
+            background: var(--color-primary);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-round);
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* "Wanted Posters" (Certifications) Section */
+        .wanted-posters-container {
+            margin-top: 4rem;
+        }
+
+        .wanted-posters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .wanted-poster {
+            background: #fdf5e6; /* Old paper color */
+            padding: 2rem;
+            border-radius: var(--border-radius-main);
+            text-align: center;
+            transform: rotate(-2deg);
+            transition: transform var(--transition-speed) ease;
+            border: 5px solid #8B4513; /* Wood color border */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .theme-dark .wanted-poster {
+            background: #4a4137;
+            color: #fdf5e6;
+            border-color: #D2B48C;
+        }
+
+
+        .wanted-poster:nth-child(even) {
+            transform: rotate(1.5deg);
+        }
+
+        .wanted-poster:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 5;
+        }
+
+        .wanted-header {
+            font-family: var(--pirate-font);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #3d2b1f; /* Dark brown */
+        }
+        .theme-dark .wanted-header { color: #fdf5e6; }
+
+
+        .wanted-for {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .wanted-skill {
+            background: color-mix(in srgb, var(--bg-card) 50%, transparent);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            border: 1px dashed #3d2b1f;
+        }
+        .theme-dark .wanted-skill {
+            background: #5a5147;
+            color: #fdf5e6;
+            border-color: #D2B48C;
+        }
+
+        .wanted-issuer {
+            font-size: 0.9rem;
+        }
+        
+        .wanted-poster::before {
+             content: 'WANTED';
+             position: absolute;
+             top: 10px;
+             left: 10px;
+             font-family: var(--pirate-font);
+             color: rgba(139, 69, 19, 0.2);
+             font-size: 2rem;
+             transform: rotate(-15deg);
+        }
+
+        /* 
+        ========================================
+        CONTACT SECTION
+        ========================================
+        */
         .contact {
-            background: linear-gradient(135deg, var(--navy-blue), var(--ocean-blue));
-            color: white;
+            background: var(--bg-contact);
+            color: var(--text-secondary);
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+
+        .contact h2 {
+            color: var(--text-secondary);
         }
 
         .contact::before {
@@ -621,8 +984,7 @@
         .contact-info {
             text-align: left;
         }
-
-        .contact-item {
+                .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
@@ -632,7 +994,7 @@
         .contact-item i {
             font-size: 1.5rem;
             margin-right: 1rem;
-            color: var(--treasure-gold);
+            color: var(--color-secondary);
             width: 30px;
         }
 
@@ -643,16 +1005,20 @@
         }
 
         .social-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             width: 50px;
             height: 50px;
-            background: var(--treasure-gold);
-            color: var(--navy-blue);
-            text-align: center;
-            line-height: 50px;
+            background: var(--color-secondary);
+            color: var(--text-accent);
+            text-decoration: none;
             border-radius: 50%;
             font-size: 1.5rem;
-            transition: transform 0.3s ease;
+            transition: transform var(--transition-speed) ease;
+        }
+        .theme-dark .social-link {
+            color: #1a1a2e;
         }
 
         .social-link:hover {
@@ -682,8 +1048,15 @@
             border: none;
             border-radius: 10px;
             font-size: 1rem;
-            font-family: 'Lato', sans-serif;
+            font-family: var(--body-font);
             background: rgba(255, 255, 255, 0.9);
+            color: #1c1e21; /* Always dark text for readability on light inputs */
+        }
+        .theme-dark .form-group input,
+        .theme-dark .form-group textarea {
+            background: rgba(15, 20, 40, 0.8);
+            color: #e0fbfc;
+            border: 1px solid var(--color-accent);
         }
 
         .form-group textarea {
@@ -691,9 +1064,13 @@
             min-height: 120px;
         }
 
-        /* Footer */
+        /* 
+        ========================================
+        FOOTER
+        ========================================
+        */
         footer {
-            background: var(--text-dark);
+            background: var(--footer-bg);
             color: white;
             text-align: center;
             padding: 2rem;
@@ -704,25 +1081,30 @@
             font-size: 1.2rem;
             font-style: italic;
             margin-bottom: 1rem;
-            color: var(--treasure-gold);
+            color: var(--color-secondary);
         }
 
-        /* Jolly Roger Flag */
+        /* 
+        ========================================
+        JOLLY ROGER (SCROLL TO TOP)
+        ========================================
+        */
         .jolly-roger {
             position: fixed;
             bottom: 20px;
             right: 20px;
             width: 60px;
             height: 60px;
-            background: white;
+            background: var(--bg-card);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            box-shadow: 0 0 10px var(--shadow-color);
             z-index: 999;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform var(--transition-speed) ease;
+            border: 2px solid var(--color-border);
         }
 
         .jolly-roger:hover {
@@ -730,11 +1112,19 @@
         }
 
         .jolly-roger::before {
-            content: '☠';
+            content: '▲';
             font-size: 2rem;
+            color: var(--text-accent);
+        }
+        .theme-one-piece .jolly-roger::before {
+            content: '☠';
         }
 
-        /* Responsive Design */
+        /* 
+        ========================================
+        RESPONSIVE DESIGN
+        ========================================
+        */
         @media (max-width: 1024px) {
             .hero h1 {
                 font-size: 3rem;
@@ -752,12 +1142,15 @@
                 right: -100%;
                 height: 100vh;
                 width: 70%;
-                background: var(--navy-blue);
+                background: var(--bg-accent);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                transition: right 0.3s ease;
+                transition: right var(--transition-speed) ease;
                 z-index: 1001;
+            }
+            .theme-light .nav-links {
+                background: white;
             }
             
             .nav-links.active {
@@ -766,7 +1159,6 @@
             
             .mobile-menu-btn {
                 display: block;
-                z-index: 1002;
             }
             
             .hero h1 {
@@ -802,19 +1194,7 @@
             .section h2::after {
                 width: 30px;
             }
-            
-            .education-timeline::before {
-                left: 15px;
-            }
-            
-            .timeline-item {
-                margin-left: 45px;
-            }
-            
-            .timeline-item::before {
-                left: -32px;
-            }
-            
+                       
             .projects-grid {
                 grid-template-columns: 1fr;
             }
@@ -853,6 +1233,11 @@
             }
         }
 
+        /* 
+        ========================================
+        UTILITIES & ANIMATIONS
+        ========================================
+        */
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
@@ -881,7 +1266,7 @@
             z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all var(--transition-speed) ease;
         }
         
         .menu-overlay.active {
@@ -890,7 +1275,17 @@
         }
     </style>
 </head>
-<body>
+<body class="theme-one-piece"> <!-- Default Theme -->
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button id="theme-one-piece" class="theme-btn active" data-theme="theme-one-piece" aria-label="One Piece Theme"><i class="fa-solid fa-skull-crossbones"></i></button>
+        <button id="theme-dark" class="theme-btn" data-theme="theme-dark" aria-label="Dark Theme"><i class="fa-solid fa-moon"></i></button>
+        <button id="theme-light" class="theme-btn" data-theme="theme-light" aria-label="Light Theme"><i class="fa-solid fa-sun"></i></button>
+    </div>
+
+    
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
@@ -964,7 +1359,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section fade-in" style="background: #f8f9fa;">
+    <section id="projects" class="section fade-in">
         <div class="section-title-container">
             <h2 class="pirate-font">The Fleet</h2>
         </div>
@@ -978,32 +1373,36 @@
                     <div class="project-type">AI Scout Ship</div>
                 </div>
                 <div class="project-content">
-                    <div class="tech-tags">
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Ollama</span>
-                        <span class="tech-tag">SQLite</span>
-                        <span class="tech-tag">Chart.js</span>
+                    <div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Ollama</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Chart.js</span>
+                        </div>
+                        <p class="project-description"><strong>Log Entry:</strong> Built a swift scout ship that translates the captain's natural language into precise SQL commands. It charts the results on interactive maps and keeps a log of all conversations. It's like having a navigator who speaks every language!</p>
                     </div>
-                    <p><strong>Log Entry:</strong> Built a swift scout ship that translates the captain's natural language into precise SQL commands. It charts the results on interactive maps and keeps a log of all conversations. It's like having a navigator who speaks every language!</p>
                     <div style="margin-top: 1rem;">
                         <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View GitHub Repo</a>
                     </div>
                 </div>
             </div>
 
-            <div class="project-card">
+                        <div class="project-card">
                 <img src="https://via.placeholder.com/400x200/4caf50/ffffff?text=Green+Energy+Platform" alt="Green Energy Sunny Project" class="project-image" />
                 <div class="project-header">
                     <div class="project-title pirate-font">The "Green Energy Sunny"</div>
                     <div class="project-type">Cola-Powered Dreadnought</div>
                 </div>
                 <div class="project-content">
-                    <div class="tech-tags">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
+                    <div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <p class="project-description"><strong>Log Entry:</strong> A platform promoting sustainable energy, just like the Thousand Sunny runs on cola! This vessel is built to showcase a brighter, more sustainable future with an interactive and powerful UI.</p>
                     </div>
-                    <p><strong>Log Entry:</strong> A platform promoting sustainable energy, just like the Thousand Sunny runs on cola! This vessel is built to showcase a brighter, more sustainable future with an interactive and powerful UI.</p>
                     <div style="margin-top: 1rem;">
                         <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Live Project</a>
                     </div>
@@ -1017,13 +1416,15 @@
                     <div class="project-type">Mobile Supply Ship</div>
                 </div>
                 <div class="project-content">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Java</span>
-                        <span class="tech-tag">Firebase</span>
-                        <span class="tech-tag">Google Maps API</span>
-                        <span class="tech-tag">Razorpay</span>
+                    <div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Google Maps API</span>
+                            <span class="tech-tag">Razorpay</span>
+                        </div>
+                        <p class="project-description"><strong>Log Entry:</strong> A mobile app that connects those with surplus supplies to those in need. Just like the Baratie restaurant, it feeds anyone, regardless of their story. Integrated secure payment systems to keep the donations safe from pirates.</p>
                     </div>
-                    <p><strong>Log Entry:</strong> A mobile app that connects those with surplus supplies to those in need. Just like the Baratie restaurant, it feeds anyone, regardless of their story. Integrated secure payment systems to keep the donations safe from pirates.</p>
                     <div style="margin-top: 1rem;">
                         <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View on Play Store</a>
                     </div>
@@ -1037,12 +1438,14 @@
                     <div class="project-type">Automated Defense System</div>
                 </div>
                 <div class="project-content">
-                    <div class="tech-tags">
-                        <span class="tech-tag">ESP32</span>
-                        <span class="tech-tag">Face Recognition</span>
-                        <span class="tech-tag">IoT</span>
+                    <div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">ESP32</span>
+                            <span class="tech-tag">Face Recognition</span>
+                            <span class="tech-tag">IoT</span>
+                        </div>
+                        <p class="project-description"><strong>Log Entry:</strong> SUUUUPER! An IoT-enabled defense system for your home. This secure gate recognizes its crew and keeps intruders out. Controlled remotely, it sends real-time alerts—because a ship's security is paramount!</p>
                     </div>
-                    <p><strong>Log Entry:</strong> SUUUUPER! An IoT-enabled defense system for your home. This secure gate recognizes its crew and keeps intruders out. Controlled remotely, it sends real-time alerts—because a ship's security is paramount!</p>
                     <div style="margin-top: 1rem;">
                         <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Demo Video</a>
                     </div>
@@ -1108,56 +1511,77 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="section fade-in" style="background: #f8f9fa;">
+    <section id="education" class="section fade-in">
         <div class="section-title-container">
             <h2 class="pirate-font">The Training Dojo</h2>
         </div>
-        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Places I've Trained</p>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Scrolls detailing the shipwright's training history.</p>
         
-        <div class="education-timeline">
-            <div class="timeline-item">
-                <h3 style="color: var(--navy-blue); margin-bottom: 1rem;">🏫 TS Model School, Telangana</h3>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap;">
-                    <span><strong>10th Grade (SSC)</strong></span>
-                    <span style="color: var(--ocean-blue);">CGPA: 9.5/10</span>
+        <div class="dojo-container">
+            <!-- School -->
+            <div class="dojo-scroll">
+                <div class="scroll-header">
+                    <i class="fas fa-school scroll-icon"></i>
+                    <div class="scroll-title">
+                        <h3>TS Model School, Telangana</h3>
+                        <span>10th Grade (SSC)</span>
+                    </div>
+                </div>
+                <div class="scroll-content">
+                    <p>Laid the foundational planks of my academic journey. Mastered the basics with discipline and determination.</p>
+                    <div class="scroll-grade">CGPA: 9.5/10</div>
                 </div>
             </div>
-            
-            <div class="timeline-item">
-                <h3 style="color: var(--navy-blue); margin-bottom: 1rem;">🎓 SR Junior College, Telangana</h3>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap;">
-                    <span><strong>12th Grade (MPC)</strong></span>
-                    <span style="color: var(--ocean-blue);">97.4%</span>
+
+            <!-- College -->
+            <div class="dojo-scroll">
+                <div class="scroll-header">
+                    <i class="fas fa-graduation-cap scroll-icon"></i>
+                    <div class="scroll-title">
+                        <h3>SR Junior College, Telangana</h3>
+                        <span>12th Grade (MPC)</span>
+                    </div>
+                </div>
+                <div class="scroll-content">
+                    <p>Navigated the challenging currents of advanced sciences and mathematics, setting the course for a future in engineering.</p>
+                    <div class="scroll-grade">97.4%</div>
                 </div>
             </div>
-            
-            <div class="timeline-item">
-                <h3 style="color: var(--navy-blue); margin-bottom: 1rem;">🏛️ Water 7 (Vellore Institute of Technology)</h3>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap;">
-                    <span><strong>M.Tech (Integrated) Software Engineering</strong></span>
-                    <span style="color: var(--ocean-blue);">2021–2026</span>
+
+            <!-- University -->
+            <div class="dojo-scroll">
+                <div class="scroll-header">
+                    <i class="fas fa-university scroll-icon"></i>
+                    <div class="scroll-title">
+                        <h3>Water 7 (Vellore Institute)</h3>
+                        <span>M.Tech (Integrated) Software Engineering</span>
+                    </div>
                 </div>
-                <div style="background: var(--treasure-gold); color: var(--navy-blue); padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; font-weight: bold;">
-                    Bounty Upon Graduation: 8.53/10
+                <div class="scroll-content">
+                    <p>At the world-renowned shipyard of VIT, I am forging my skills in the art of software engineering (2021–2026).</p>
+                    <div class="scroll-grade">Bounty Upon Graduation: 8.53/10</div>
                 </div>
             </div>
         </div>
         
-        <div style="margin-top: 3rem;">
-            <h3 class="pirate-font" style="text-align: center; margin-bottom: 2rem; font-size: 2rem; color: var(--navy-blue);">Wanted Posters (Certifications)</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div style="background: var(--pirate-red); color: white; padding: 2rem; border-radius: 15px; text-align: center; transform: rotate(-2deg); transition: transform 0.3s ease; border: 3px dashed var(--treasure-gold);">
-                    <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">WANTED</div>
-                    <div style="font-size: 1.2rem; margin-bottom: 1rem;">FOR MASTERY OF DATA</div>
-                    <div style="background: white; color: var(--pirate-red); padding: 0.5rem; border-radius: 10px; margin-bottom: 1rem;">Introduction to Analytics</div>
-                    <div style="font-size: 0.9rem;">Great Learning Academy | AUG 2025</div>
+        <div class="wanted-posters-container fade-in">
+             <div class="section-title-container" style="margin-top: 5rem;">
+                <h2 class="pirate-font">Wanted Posters</h2>
+            </div>
+             <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Official recognition of skills and deeds.</p>
+            <div class="wanted-posters-grid">
+                <div class="wanted-poster">
+                    <div class="wanted-header">WANTED</div>
+                    <div class="wanted-for">FOR MASTERY OF DATA</div>
+                    <div class="wanted-skill">Introduction to Analytics</div>
+                    <div class="wanted-issuer">Great Learning Academy | AUG 2025</div>
                 </div>
                 
-                <div style="background: var(--navy-blue); color: white; padding: 2rem; border-radius: 15px; text-align: center; transform: rotate(1deg); transition: transform 0.3s ease; border: 3px dashed var(--treasure-gold);">
-                    <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">WANTED</div>
-                    <div style="font-size: 1.2rem; margin-bottom: 1rem;">FOR BUILDING SUPER WEAPONS</div>
-                    <div style="background: white; color: var(--navy-blue); padding: 0.5rem; border-radius: 10px; margin-bottom: 1rem;">Software Developer Intern</div>
-                    <div style="font-size: 0.9rem;">TechCiti Technologies | MAY–JUL 2024</div>
+                <div class="wanted-poster">
+                    <div class="wanted-header">WANTED</div>
+                    <div class="wanted-for">FOR BUILDING SUPER WEAPONS</div>
+                    <div class="wanted-skill">Software Developer Intern</div>
+                    <div class="wanted-issuer">TechCiti Technologies | MAY–JUL 2024</div>
                 </div>
             </div>
         </div>
@@ -1166,7 +1590,7 @@
     <!-- Contact Section -->
     <section id="contact" class="section contact">
         <div class="section-title-container">
-            <h2 class="pirate-font" style="color: white;">Sound the Den Den Mushi!</h2>
+            <h2 class="pirate-font">Sound the Den Den Mushi!</h2>
         </div>
         <p style="font-size: 1.2rem; margin-bottom: 3rem;">Are you a Captain looking for a Shipwright to build the vessel that will make you the King of the Pirates? Let's talk. I'm always looking for a new adventure.</p>
         
@@ -1190,19 +1614,19 @@
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://github.com/vamshikrishna9608" class="social-link" target="_blank">
+                    <a href="https://github.com/vamshikrishna9608" class="social-link" target="_blank" aria-label="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="#" class="social-link" aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="#" class="social-link" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
                 </div>
             </div>
-            
-            <div class="contact-form">
+
+                        <div class="contact-form">
                 <h3 style="margin-bottom: 2rem; font-size: 1.5rem;"><i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>Send Message in a Bottle</h3>
                 <form>
                     <div class="form-group">
@@ -1221,7 +1645,7 @@
                     </div>
                     
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>Send Message in a Bottle
+                        <i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>Send Message
                     </button>
                 </form>
             </div>
@@ -1241,189 +1665,178 @@
         </div>
     </footer>
     
-    <!-- Jolly Roger Flag -->
+    <!-- Jolly Roger Flag (Scroll to Top) -->
     <div class="jolly-roger" id="scrollToTop"></div>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.querySelector('.nav-links').classList.remove('active');
-                    document.querySelector('.menu-overlay').classList.remove('active');
-                }
-            });
-        });
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // Navbar background change on scroll
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(26, 35, 126, 0.98)';
-            } else {
-                nav.style.background = 'rgba(26, 35, 126, 0.95)';
-            }
-            
-            // Show/hide scroll to top button
-            const scrollButton = document.getElementById('scrollToTop');
-            if (window.scrollY > 500) {
-                scrollButton.style.display = 'flex';
-            } else {
-                scrollButton.style.display = 'none';
-            }
-        });
+            // ===================================
+            // THEME SWITCHER LOGIC
+            // ===================================
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const body = document.body;
+            const themeClasses = ['theme-one-piece', 'theme-dark', 'theme-light'];
 
-        // Scroll to top functionality
-        document.getElementById('scrollToTop').addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Add hover effects to stat cards and wanted posters
-        document.querySelectorAll('.stat-card, [style*="transform: rotate"]').forEach(card => {
-            if (card.style.transform && card.style.transform.includes('rotate')) {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'rotate(0deg) scale(1.05)';
-                });
+            const applyTheme = (theme) => {
+                // Remove all possible theme classes
+                body.classList.remove(...themeClasses);
+                // Add the selected theme class
+                body.classList.add(theme);
                 
-                card.addEventListener('mouseleave', function() {
-                    const originalRotation = this.classList.contains('stat-card') ? 
-                        (Array.from(this.parentNode.children).indexOf(this) === 1 ? 'rotate(1deg)' : 
-                         Array.from(this.parentNode.children).indexOf(this) === 2 ? 'rotate(-1deg)' : 'rotate(-2deg)') :
-                        this.style.transform.includes('rotate(-2deg)') ? 'rotate(-2deg)' : 'rotate(1deg)';
-                    this.style.transform = originalRotation;
+                // Update active button state
+                themeButtons.forEach(btn => {
+                    if (btn.dataset.theme === theme) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
                 });
-            }
-        });
 
-        // Mobile menu functionality
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        const overlay = document.querySelector('.menu-overlay');
-        
-        menuBtn.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            // Change icon based on menu state
-            const icon = menuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+                // Save theme to local storage
+                localStorage.setItem('selectedTheme', theme);
+            };
+
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const selectedTheme = button.dataset.theme;
+                    applyTheme(selectedTheme);
+                });
+            });
+
+            // On page load, check for a saved theme
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme && themeClasses.includes(savedTheme)) {
+                applyTheme(savedTheme);
             } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                applyTheme('theme-one-piece'); // Default theme
             }
-        });
-        
-        overlay.addEventListener('click', function() {
-            navLinks.classList.remove('active');
-            overlay.classList.remove('active');
-            menuBtn.querySelector('i').classList.remove('fa-times');
-            menuBtn.querySelector('i').classList.add('fa-bars');
-        });
 
-        // Form submission handler
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Simple form validation and submission simulation
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (name && email && message) {
-                alert('Message sent successfully! I\'ll get back to you soon, nakama!');
-                this.reset();
-            } else {
-                alert('Please fill in all fields before sending your message in a bottle!');
-            }
-        });
 
-        // Add typing effect to hero tagline
-        function typeWriter(element, text, speed = 50) {
-            let i = 0;
-            element.innerHTML = '';
+            // ===================================
+            // SMOOTH SCROLLING
+            // ===================================
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Close mobile menu if open
+                        document.querySelector('.nav-links').classList.remove('active');
+                        document.querySelector('.menu-overlay').classList.remove('active');
+                        const icon = document.querySelector('.mobile-menu-btn i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // ===================================
+            // NAVBAR & SCROLL-TO-TOP VISIBILITY
+            // ===================================
+            const nav = document.querySelector('nav');
+            const scrollButton = document.getElementById('scrollToTop');
             
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
+            window.addEventListener('scroll', function() {
+                // Navbar style change
+                if (window.scrollY > 100) {
+                    nav.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                } else {
+                    nav.style.boxShadow = 'none';
                 }
-            }
-            
-            setTimeout(type, 1000); // Start after 1 second
-        }
+                
+                // Show/hide scroll to top button
+                if (window.scrollY > 500) {
+                    scrollButton.style.display = 'flex';
+                } else {
+                    scrollButton.style.display = 'none';
+                }
+            });
 
-        // Initialize typing effect when page loads
-        window.addEventListener('load', function() {
+            // Scroll to top functionality
+            scrollButton.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ===================================
+            // FADE-IN ANIMATION ON SCROLL
+            // ===================================
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            
+            // ===================================
+            // MOBILE MENU
+            // ===================================
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.menu-overlay');
+            const menuIcon = menuBtn.querySelector('i');
+            
+            const toggleMenu = () => {
+                navLinks.classList.toggle('active');
+                overlay.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    menuIcon.classList.replace('fa-bars', 'fa-times');
+                } else {
+                    menuIcon.classList.replace('fa-times', 'fa-bars');
+                }
+            };
+            
+            menuBtn.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+
+            // ===================================
+            // FORM SUBMISSION
+            // ===================================
+            document.querySelector('form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    alert('Message sent successfully! I\'ll get back to you soon, nakama!');
+                    this.reset();
+                } else {
+                    alert('Please fill in all fields before sending your message in a bottle!');
+                }
+            });
+
+            // ===================================
+            // HERO TYPING EFFECT
+            // ===================================
             const tagline = document.querySelector('.hero-tagline');
-            const text = tagline.textContent;
-            typeWriter(tagline, text, 50);
+            if(tagline) {
+                const text = tagline.textContent;
+                tagline.innerHTML = '';
+                let i = 0;
+                
+                function typeWriter() {
+                    if (i < text.length) {
+                        tagline.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                setTimeout(typeWriter, 1000); // Start after 1 second
+            }
         });
-
-        // Add particle effect to hero section
-        function createParticles() {
-            const hero = document.querySelector('.hero');
-            const particleCount = 20;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = '4px';
-                particle.style.height = '4px';
-                particle.style.background = 'rgba(255, 215, 0, 0.6)';
-                particle.style.borderRadius = '50%';
-                particle.style.pointerEvents = 'none';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animation = `sparkle ${3 + Math.random() * 4}s ease-in-out infinite`;
-                hero.appendChild(particle);
-            }
-        }
-
-        // Add sparkle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkle {
-                0%, 100% { opacity: 0; transform: scale(0); }
-                50% { opacity: 1; transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize particles
-        createParticles();
     </script>
 </body>
 </html>
